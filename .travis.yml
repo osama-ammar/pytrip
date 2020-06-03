@@ -57,5 +57,6 @@ install:
 
 # finally run tox tests
 script:
-  - tox --notest && travis_retry tox -- -n 8
+  - travis_wait tox --notest
+  - travis_retry tox
   - if [[ "$TRAVIS_TEST_RESULT" == "0" ]] && [[ $TOXENV == "packaging" ]]; then .travis/deploy_package.sh "$TARGET" $PRECMD; fi
