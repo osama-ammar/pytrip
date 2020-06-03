@@ -28,6 +28,18 @@ from setuptools.command.build_ext import build_ext as _build_ext
 from pytrip.version import git_version
 
 
+class build_ext(_build_ext):
+    """
+    From https://stackoverflow.com/questions/19919905/how-to-bootstrap-numpy-installation-in-setup-py/21621689#21621689
+    """
+    def finalize_options(self):
+        _build_ext.finalize_options(self)
+        # Prevent numpy from thinking it is still in its setup process:
+        __builtins__.__NUMPY_SETUP__ = False
+        import numpy
+        self.include_dirs.append(numpy.get_include())
+
+
 def write_version_py(filename=os.path.join('pytrip', 'VERSION')):
     cnt = """%(version)s
 """
