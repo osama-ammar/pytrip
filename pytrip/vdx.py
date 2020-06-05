@@ -357,7 +357,7 @@ class VdxCube:
         #   Study Instance UID for structures is the same as Study Instance UID for CTs
         ds.StudyInstanceUID = None
         if self.cube is not None:
-            if self.cube.hasattr('dicom_data'):
+            if hasattr(self.cube, 'dicom_data'):
                 ds.StudyInstanceUID = None  # TODO get proper data
         if ds.StudyInstanceUID is None:
             ds.StudyInstanceUID = None  # TODO generate some value
@@ -395,7 +395,7 @@ class VdxCube:
             rt_ref_series_data = Dataset()
 
             if self.cube is not None:
-                if self.cube.hasattr('dicom_data'):
+                if hasattr(self.cube, 'dicom_data'):
                     rt_ref_series_data.SeriesInstanceUID = None  # TODO get proper data
             if rt_ref_series_data.SeriesInstanceUID is None:
                 rt_ref_series_data.SeriesInstanceUID = None  # TODO generate some value
